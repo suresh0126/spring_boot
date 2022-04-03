@@ -2,7 +2,7 @@ pipeline{
     agent any
     
     environment {
-        registry = "https://hub.docker.com/springboot"
+        registry = "reddymasu/springboot"
         registryCredential = 'docker_hub'
         dockerImage = ''
     }
