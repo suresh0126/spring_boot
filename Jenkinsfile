@@ -1,13 +1,6 @@
 pipeline{
     agent any
     
-    environment {
-        registry = "reddymasu/springboot"
-        registryCredential = 'docker_hub'
-        dockerImage = ''
-    }
-
-
     stages {
         
         stage('source code check'){
