@@ -15,10 +15,12 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/suresh0126/spring_boot.git'
             }
         }
-        stage('Build docker image') { 
-        script {
-          docker.build registry + ":$BUILD_NUMBER"
-        }
+        stage('Build docker image') {
+            steps {
+                script {
+                    docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
         }
         stage('Push docker image') { 
             steps{    
