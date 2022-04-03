@@ -25,7 +25,6 @@ pipeline{
             agent {label 'webapp'}
             steps {
                 echo "${env.NODE_NAME}"
-                sh 'docker kill $(docker ps -aq)'
                 sh 'docker rm $(docker ps -aq)'
                 sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 203423047758.dkr.ecr.us-east-1.amazonaws.com'
                 sh 'docker run -d -p 8080:8080 -it 203423047758.dkr.ecr.us-east-1.amazonaws.com/spring_boot:latest'
