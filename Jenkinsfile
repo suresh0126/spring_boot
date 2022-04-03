@@ -17,18 +17,10 @@ pipeline{
         }
         stage('Build docker image') {
             steps {
-                script {
-                    docker.build registry + ":$BUILD_NUMBER"
-                }
-            }
-        }
-        stage('Push docker image') { 
-            steps{    
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
-                    }
-                }
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 203423047758.dkr.ecr.us-east-1.amazonaws.com'
+                sh 'docker build -t spring_boot .'
+                sh 'docker tag spring_boot:latest 203423047758.dkr.ecr.us-east-1.amazonaws.com/spring_boot:latest'
+                sh 'docker push 203423047758.dkr.ecr.us-east-1.amazonaws.com/spring_boot:latest'
             }
         }
         stage('Remove Unused docker image') {
